@@ -2,39 +2,57 @@ import React, { useState } from 'react';
 
 function Body() {
   const GameComponent = () => {
-    const [number, setNumber] = useState(1);
-
-    const play = () => {
-      setNumber(1);
-    };
+    const [number, setNumber] = useState(2);
 
     const random = () => {
       const diceValues = ['', '⚀', '⚁', '⚂', '⚃', '⚄', '⚅'];
       const diceRoll = Math.ceil(Math.random() * 6);
 
-      const newNumber = number + diceRoll <= 100 ? number + diceRoll : number;
+      const newNumber = number + diceRoll <= 80 ? number + diceRoll : number;
 
       setNumber(newNumber);
+      
       document.getElementById('dice').innerHTML = diceValues[diceRoll];
     };
 
     const renderBoardBoxes = () => {
       const boardBoxes = [];
 
-      for (let i = 100; i >= 1; i--) {
-        const classNames = `boardbox ${i % 10 === 0 ? 'right' : 'left'}`;
+      var tempHoldRow = 0; 
+      var tempHoldCol = 0;
+      for (let i = 81; i >= 1; i--) {
+        var subclass="";
+        if( tempHoldRow < 9 && tempHoldCol === 0){
+          subclass = 'right';
+          tempHoldRow +=1;
+          if (tempHoldRow === 9){
+            tempHoldCol = 1;
+            tempHoldRow = 0;
+          }
+        }
+        else if(tempHoldRow < 9 && tempHoldCol === 1){
+          subclass = 'left'; 
+          tempHoldRow +=1;
+          if (tempHoldRow === 9){
+            tempHoldCol = 0;
+            tempHoldRow = 0;
+          }
+          }
+        const classNames = `boardbox ${subclass}`;
         const imgSrc =
           i === number
-            ? 'http://www.freepngimg.com/thumb/chess/9-chess-pawn-png-image-thumb.png'
+            ? 'https://img.icons8.com/ultraviolet/40/pawn.png'
             : '';
 
         boardBoxes.push(
           <div className={classNames} key={i}>
-            {imgSrc && <img className="img" src={imgSrc} alt="" />}
+            {imgSrc && <img className="img" id='pawn' src={imgSrc} alt="" />}
           </div>
         );
       }
-
+      if (number >= 80){
+        document.getElementById("diceholder").innerHTML = "<h1 style='color:white'>You Won</h1>"
+      }
       return boardBoxes;
     };
 
@@ -43,15 +61,13 @@ function Body() {
         <div className="out">{renderBoardBoxes()}</div>
         <div className="mn"></div>
         <br />
-        <br />
-        <br />
         <center>
           <br />
-          <br />
-          <br />
-          <button id="dice" onClick={random}>
+         <div id="diceholder">
+         <button id="dice" onClick={random}>
             <h4>Press Here</h4>
           </button>
+         </div>
         </center>
       </div>
     );
@@ -68,6 +84,7 @@ function Body() {
     top: 0,
     left: 0,
     right: 0,
+    width: '100vw',
     backgroundColor: 'rgba(255, 255, 255, 0.1)', // Adjust the transparency here (0.8 represents 80% opacity)
     backdropFilter: 'blur(10px)', // Add a blur effect
   };
@@ -78,24 +95,15 @@ function Body() {
         <nav className="navbar navbar-expand-lg navbar-expand-sm navbar-expand-md navbar-expand navbar-primary sticky-top" style={navbarStyle}>
           <ul className="navbar-nav mr-auto" style={{ margin: 'auto' }}>
             <li className="nav-link active">
-              <img src="./images/clublogo.png" alt="Club Logo" />
+              <img src="./images/clublogo.png" width={'110%'} alt="Club Logo" />
             </li>
           </ul>
-          <button
-            type="button"
-            className="btn btn"
-            style={{ width: '150px', height: '50px', marginTop: "2px", borderRadius: "50px", fontWeight: 'bold', color:"#0B5ED7", backgroundColor:"white" }}
-          >
-            <a className="navbar-brand" href="#" style={{ color: "#0B5ED7", fontWeight: 'bold' }}>
-              ऐlaan
-            </a>
-          </button>
           <button
             type="button"
             className="btn btn-primary"
             style={{ width: '300px', height: '50px', marginTop: "2px", borderRadius: "50px", fontWeight: 'bold' }}
           >
-            Player Name: <span id="playerName">Pratyush</span>
+            Player Name: <span id="playerName"> REMOTE_NAME </span>
           </button>
           <div className="collapse navbar-collapse" id="navbarNav"></div>
         </nav>
@@ -109,9 +117,9 @@ function Body() {
           <button
             type="button"
             className="btn btn"
-            style={{alignItems:"center", width: '200px', height: '80px', marginTop: "2px", borderRadius: "50px", fontWeight: 'bold', color:"#0B5ED7", backgroundColor:"white" }}
+            style={{alignItems:"center", width: '50vw', height: 'auto', margin:0, borderRadius: "25px", fontWeight: 'bold', color:"#0B5ED7", backgroundColor:"white" }}
           >
-            <a className="navbar-brand" href="#" style={{ color: "#0B5ED7", fontWeight: 'bold',fontSize: '2.8rem'  }}>
+            <a className="navbar-brand" href="#" style={{ color: "#0B5ED7", fontWeight: 'bold',fontSize: '2rem'  }}>
               ऐlaan
             </a>
           </button>
@@ -119,7 +127,7 @@ function Body() {
           <br />
           <div
             className="card mx-auto"
-            style={{ width: '30rem', alignItems: 'center', justifyContent: 'center', borderRadius:"20px", borderColor:"white" ,  backgroundColor: 'rgba(255, 255, 255, 0.1)', backdropFilter: 'blur(5px)',}}
+            style={{ width: '90vw', alignItems: 'center', justifyContent: 'center', borderRadius:"10px", borderColor:"white" ,  backgroundColor: 'rgba(255, 255, 255, 0.1)', backdropFilter: 'blur(5px)',}}
           >
             <div className="card-body">
               <h2 className="card-title" style={{color:"white"}}>Message Box</h2>
@@ -139,17 +147,14 @@ function Body() {
               color: white;
             }
             .out {
-              height: 525px;
-              width: 525px;
+              height: 100vw;
+              width: 100vw;
               background-image: url("./images/board.jpg");
-              background-size: 525px 525px;
+              background-size: 100vw 100vw;
               background-repeat: no-repeat;
               float: center;
-              border-radius: 20px;
             }
             .mn {
-              height: 500px;
-              width: 500px;
               position: absolute;
               top: 90px;
               left: 20px;
@@ -168,8 +173,8 @@ function Body() {
               color: white;
             }
             .boardbox {
-              height: 50px;
-              width: 50px;
+              height: calc(100vw/9);
+              width: calc(100vw/9);
               z-index: -1;
             }
             .left {
@@ -179,8 +184,8 @@ function Body() {
               float: right;
             }
             .img {
-              height: 45px;
-              width: 50px;
+              height: auto;
+              width: calc(100vw/9);
               margin: 2px 0px 3px 0px;
             }
             #dice {
