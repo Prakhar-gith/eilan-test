@@ -5,6 +5,8 @@ function Body() {
     const [number, setNumber] = useState(2);
 
     const random = () => {
+  document.getElementById('verifyButton').removeAttribute("disabled");
+  document.getElementById("verifyButton").innerHTML="Verify";
       const diceValues = ['', '⚀', '⚁', '⚂', '⚃', '⚄', '⚅'];
       const diceRoll = Math.ceil(Math.random() * 6);
 
@@ -13,6 +15,7 @@ function Body() {
       setNumber(newNumber);
       
       document.getElementById('dice').innerHTML = diceValues[diceRoll];
+      document.getElementById('dice').setAttribute("disabled","disabled");
     };
 
     const renderBoardBoxes = () => {
@@ -41,7 +44,7 @@ function Body() {
         const classNames = `boardbox ${subclass}`;
         const imgSrc =
           i === number
-            ? 'https://img.icons8.com/ultraviolet/40/pawn.png'
+            ? 'https://img.icons8.com/emoji/48/rocket-emji.png'
             : '';
 
         boardBoxes.push(
@@ -72,7 +75,12 @@ function Body() {
       </div>
     );
   };
-
+const unlockButton = () =>{
+  document.getElementById('dice').removeAttribute("disabled");
+  document.getElementById("verifyButton").innerHTML="Verified !";
+  document.getElementById('verifyButton').setAttribute("disabled","disabled");
+  
+}
   const divStyle = {
     backgroundImage: 'url("./images/bg.jpg")',
    
@@ -119,7 +127,7 @@ function Body() {
             className="btn btn"
             style={{alignItems:"center", width: '50vw', height: 'auto', margin:0, borderRadius: "25px", fontWeight: 'bold', color:"#0B5ED7", backgroundColor:"white" }}
           >
-            <a className="navbar-brand" href="#" style={{ color: "#0B5ED7", fontWeight: 'bold',fontSize: '2rem'  }}>
+            <a className="navbar-brand" href="#" style={{ color: "white", fontWeight: 'bold',fontSize: '2rem'  }}>
               ऐlaan
             </a>
           </button>
@@ -193,7 +201,7 @@ function Body() {
               width: 80px;
               font-size: 70px;
               display: flex;
-              color: #0B5ED7;
+              color: white;
               margin: auto;
               border: none;
               align-items: center;
@@ -202,10 +210,25 @@ function Body() {
               border-radius: 10%;
               background-color: white;
             }
+            #dice:disabled{
+              color:#c1bbbb;
+            }
           `}
           </style>
           <GameComponent />
           <br/>
+          <div style={{ textAlign: 'center', color: 'white'}}>
+
+<br></br>
+<h2>Teammates</h2>
+<div className="card mx-auto" style={{ width: '18rem', alignItems: 'center', justifyContent: 'center' }}>
+  <div className="card-body">
+  <h5 className="card-title">Team ID: TEAM_ID</h5>
+    <p className="card-text"><span id="taskMessage">TEAMMATES</span></p>
+  </div>
+</div>
+<br></br>
+</div>
           <br/>
           <div style={{ color: 'white', textAlign: 'center', fontSize:"1.5rem" }}>
             <h2>Directions</h2>
@@ -223,6 +246,11 @@ function Body() {
     </div>
   </div>
 </div>
+<br/>
+<button id='verifyButton' onClick={unlockButton} style={{padding:"2.5% 4%", border:"none", height:"auto", width:"auto", borderRadius:"10px", textAlign:"center", fontSize:"1rem"}}>Verify</button>
+
+<br/>
+<br/>
 <br/>
 <center><h5>Made by Tech Team - iOS Club !</h5></center>
 <br/>
