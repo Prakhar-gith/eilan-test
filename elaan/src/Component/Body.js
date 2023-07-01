@@ -123,11 +123,9 @@ const unlockButton = () =>{
         <div style={{ textAlign: 'center', color: 'white' }}>
           <br />
           <button
-            type="button"
-            className="btn btn"
-            style={{alignItems:"center", width: '50vw', height: 'auto', margin:0, borderRadius: "25px", fontWeight: 'bold', color:"#0B5ED7", backgroundColor:"white" }}
+            style={{border:"none", alignItems:"center", width: '50vw', height: 'auto', margin:0, borderRadius: "25px", fontWeight: 'bold', color:"white", backgroundColor:"white" }}
           >
-            <a className="navbar-brand" href="#" style={{ color: "white", fontWeight: 'bold',fontSize: '2rem'  }}>
+            <a className="navbar-brand" href="#" style={{ color: "#0B5ED7", fontWeight: 'bold',fontSize: '2rem'  }}>
               ऐlaan
             </a>
           </button>
@@ -201,7 +199,7 @@ const unlockButton = () =>{
               width: 80px;
               font-size: 70px;
               display: flex;
-              color: white;
+              color: #0B5ED7;
               margin: auto;
               border: none;
               align-items: center;
@@ -211,7 +209,7 @@ const unlockButton = () =>{
               background-color: white;
             }
             #dice:disabled{
-              color:#c1bbbb;
+              background-color:#c1bbbb;
             }
           `}
           </style>
