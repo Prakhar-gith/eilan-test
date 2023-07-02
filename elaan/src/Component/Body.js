@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 function Body() {
   const GameComponent = () => {
     const [number, setNumber] = useState(2);
-
     const random = () => {
   document.getElementById('verifyButton').removeAttribute("disabled");
   document.getElementById("verifyButton").innerHTML="Verify";
@@ -76,10 +75,15 @@ function Body() {
     );
   };
 const unlockButton = () =>{
-  document.getElementById('dice').removeAttribute("disabled");
-  document.getElementById("verifyButton").innerHTML="Verified !";
-  document.getElementById('verifyButton').setAttribute("disabled","disabled");
-  
+ var inpCode = prompt("Enter Volunteer Only Code : ")
+  if (inpCode === "SBVgame2023"){
+    document.getElementById('dice').removeAttribute("disabled");
+    document.getElementById("verifyButton").innerHTML="Verified !";
+    document.getElementById('verifyButton').setAttribute("disabled","disabled");
+  }
+  else{
+    alert("Wrong Code! If you are a team member attempting to unlock this, it will result in your team's disqualification next time")
+  }
 }
   const divStyle = {
     backgroundImage: 'url("./images/bg.jpg")',
@@ -133,7 +137,7 @@ const unlockButton = () =>{
           <br />
           <div
             className="card mx-auto"
-            style={{ width: '90vw', alignItems: 'center', justifyContent: 'center', borderRadius:"10px", borderColor:"white" ,  backgroundColor: 'rgba(255, 255, 255, 0.1)', backdropFilter: 'blur(5px)',}}
+            style={{ width: '90vw', alignItems: 'center', justifyContent: 'center', borderRadius:"10px", borderColor:"white" ,  backgroundColor: 'rgba(0, 0, 0, 0.4)', backdropFilter: 'blur(5px)',}}
           >
             <div className="card-body">
               <h2 className="card-title" style={{color:"white"}}>Message Box</h2>

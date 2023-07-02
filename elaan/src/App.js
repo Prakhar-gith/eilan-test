@@ -1,15 +1,18 @@
 import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Body from './Component/Body';
 import Passwords from './Component/passwords';
 
 function App() {
   return (
-    <div className="App">
-       
-       <Body/>
-    </div>
+    <BrowserRouter>
+    <Routes>
+    <Route path="/" element={<Passwords />} />
+      <Route path="game" element={<Body />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

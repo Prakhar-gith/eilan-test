@@ -1,22 +1,43 @@
 import React from "react";
 import "./passwords.css";
+import {  useNavigate } from "react-router-dom";
+import Body from "./Body";
 
 function Passwords() {
+
+  const navigate = useNavigate();
+  function validateAnswers (){
+
+    var form = document.forms["AnswerForm"];
+    var ans  = ["sun", "saturn", 'supernova', 'solar eclipse', "galaxy", "ursa major", "comet" , "nebula" ];
+    for (let index = 0; index <8; ++index) {
+      console.log(form[index.toString()].value.toString().toLowerCase().trim());
+      if (form[index.toString()].value.toString().toLowerCase().trim() === ans[index]){
+        console.log("passed "+index);
+      }
+      else{
+        console.log("leaving "+index);
+        return
+      }
+    }
+    navigate("game");
+    }
+  
   return (
-    <div className="container" style={{ textAlign: "center", height: "100vh", display: "flex", justifyContent: "center", alignItems: "center", marginTop:"100px" }}>
+    <div className="container" style={{ textAlign: "center", height: "100vh", display: "flex",margin: "100px auto", justifyContent: "center", alignItems: "center", marginTop:"100px" }}>
     <img
       src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTydMJTLALd6Fysk6FEo4cNQe84_TZHlKLO4wiX7X0glz57eZx0V8RFpf9IDcYXgz63ryc&usqp=CAU"
       alt="Background"
     />
-    <div className="container" style={{ textAlign: "center" }}>
-      <form style={{ borderRadius: "20px", maxWidth: "500px", margin: "0 auto" }}>
+    <div className="container" style={{ textAlign: "center",margin: "100px auto" }}>
+      <form style={{ borderRadius: "20px", maxWidth: "600px", margin: "100px auto" }} action="javascript:void (0);" name="AnswerForm">
         <h1>Hello PLAYERNAME</h1>
         <h3>Please Enter all the answers here:</h3>
         <div className="ui divider"></div>
         <div className="ui form">
           <div className="field">
             <label style={{ marginBottom: "10px", display: "block" }}>
-              Answer 1:
+              I'm a Fiery Sphere : 
             </label>
             <input
               type="text"
@@ -34,7 +55,7 @@ required
 
           <div className="field">
             <label style={{ marginBottom: "10px", display: "block" }}>
-              Answer 2:
+            I'm a Planet with Rings :
             </label>
             <input
               type="text"
@@ -52,7 +73,7 @@ required
 
           <div className="field">
             <label style={{ marginBottom: "10px", display: "block" }}>
-              Answer 3:
+            I'm a Cosmic Event :
             </label>
             <input
               type="text"
@@ -70,7 +91,7 @@ required
 
           <div className="field">
             <label style={{ marginBottom: "10px", display: "block" }}>
-              Answer 4:
+            I'm a Phenomenon :
             </label>
             <input
               type="text"
@@ -88,7 +109,7 @@ required
 
           <div className="field">
             <label style={{ marginBottom: "10px", display: "block" }}>
-              Answer 5:
+              I'm a Cluster of Stars:
             </label>
             <input
               type="text"
@@ -106,7 +127,7 @@ required
 
           <div className="field">
             <label style={{ marginBottom: "10px", display: "block" }}>
-              Answer 6:
+            I'm a Constellation:
             </label>
             <input
               type="text"
@@ -124,7 +145,7 @@ required
 
           <div className="field">
             <label style={{ marginBottom: "10px", display: "block" }}>
-              Answer 7:
+            I visit Once in a While:
             </label>
             <input
               type="text"
@@ -140,8 +161,27 @@ required
             />
           </div>
 
+          <div className="field">
+            <label style={{ marginBottom: "10px", display: "block" }}>
+              I'm a Celestial Body:
+            </label>
+            <input
+              type="text"
+required
+              name="8"
+              placeholder="Please Enter The Answer"
+              style={{
+                marginBottom: "10px",
+                borderRadius: "20px",
+                height: "20px",
+                width: "100%",
+              }}
+            />
+          </div>
+
           <button
           type="submit"
+          onClick={validateAnswers}
             className="fluid ui button blue"
             style={{
               borderRadius: "20px",
